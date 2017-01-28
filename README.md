@@ -12,6 +12,7 @@ Clone repository, create virtual environment and install dependencies:
     $ cd dimensionality-reduction
     $ mkvirtualenv -a . dimensionality-reduction
     $ pip install -r requirements.txt
+    $ jupyter nbextension enable --py widgetsnbextension
 
 Open jupyter notebook:
 
