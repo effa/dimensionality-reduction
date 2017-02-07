@@ -1,0 +1,702 @@
+
+% Default to the notebook output style
+
+    
+
+
+% Inherit from the specified cell style.
+
+
+
+
+    
+\documentclass[11pt]{article}
+
+    
+    
+    \usepackage[T1]{fontenc}
+    % Nicer default font (+ math font) than Computer Modern for most use cases
+    \usepackage{mathpazo}
+
+    % Basic figure setup, for now with no caption control since it's done
+    % automatically by Pandoc (which extracts ![](path) syntax from Markdown).
+    \usepackage{graphicx}
+    % We will generate all images so they have a width \maxwidth. This means
+    % that they will get their normal width if they fit onto the page, but
+    % are scaled down if they would overflow the margins.
+    \makeatletter
+    \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth
+    \else\Gin@nat@width\fi}
+    \makeatother
+    \let\Oldincludegraphics\includegraphics
+    % Set max figure width to be 80% of text width, for now hardcoded.
+    \renewcommand{\includegraphics}[1]{\Oldincludegraphics[width=.8\maxwidth]{#1}}
+    % Ensure that by default, figures have no caption (until we provide a
+    % proper Figure object with a Caption API and a way to capture that
+    % in the conversion process - todo).
+    \usepackage{caption}
+    \DeclareCaptionLabelFormat{nolabel}{}
+    \captionsetup{labelformat=nolabel}
+
+    \usepackage{adjustbox} % Used to constrain images to a maximum size 
+    \usepackage{xcolor} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage{textcomp} % defines textquotesingle
+    % Hack from http://tex.stackexchange.com/a/47451/13684:
+    \AtBeginDocument{%
+        \def\PYZsq{\textquotesingle}% Upright quotes in Pygmentized code
+    }
+    \usepackage{upquote} % Upright quotes for verbatim code
+    \usepackage{eurosym} % defines \euro
+    \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+    \usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{grffile} % extends the file name processing of package graphics 
+                         % to support a larger range 
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    \usepackage[inline]{enumitem} % IRkernel/repr support (it uses the enumerate* environment)
+    \usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
+                                % normalem makes italics be italics, not underlines
+    
+
+    
+    
+    % Colors for the hyperref package
+    \definecolor{urlcolor}{rgb}{0,.145,.698}
+    \definecolor{linkcolor}{rgb}{.71,0.21,0.01}
+    \definecolor{citecolor}{rgb}{.12,.54,.11}
+
+    % ANSI colors
+    \definecolor{ansi-black}{HTML}{3E424D}
+    \definecolor{ansi-black-intense}{HTML}{282C36}
+    \definecolor{ansi-red}{HTML}{E75C58}
+    \definecolor{ansi-red-intense}{HTML}{B22B31}
+    \definecolor{ansi-green}{HTML}{00A250}
+    \definecolor{ansi-green-intense}{HTML}{007427}
+    \definecolor{ansi-yellow}{HTML}{DDB62B}
+    \definecolor{ansi-yellow-intense}{HTML}{B27D12}
+    \definecolor{ansi-blue}{HTML}{208FFB}
+    \definecolor{ansi-blue-intense}{HTML}{0065CA}
+    \definecolor{ansi-magenta}{HTML}{D160C4}
+    \definecolor{ansi-magenta-intense}{HTML}{A03196}
+    \definecolor{ansi-cyan}{HTML}{60C6C8}
+    \definecolor{ansi-cyan-intense}{HTML}{258F8F}
+    \definecolor{ansi-white}{HTML}{C5C1B4}
+    \definecolor{ansi-white-intense}{HTML}{A1A6B2}
+
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \providecommand{\tightlist}{%
+      \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+    
+    % Additional commands for more recent versions of Pandoc
+    \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+    \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+    \newcommand{\ImportTok}[1]{{#1}}
+    \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+    \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+    \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+    \newcommand{\BuiltInTok}[1]{{#1}}
+    \newcommand{\ExtensionTok}[1]{{#1}}
+    \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+    \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+    \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    
+    
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatability definitions
+    \def\gt{>}
+    \def\lt{<}
+    % Document parameters
+    \title{feature-selection}
+    
+    
+    
+
+    % Pygments definitions
+    
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@ch\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@dl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@sa\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@vm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@fm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@cpf\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@mb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    % Exact colors from NB
+    \definecolor{incolor}{rgb}{0.0, 0.0, 0.5}
+    \definecolor{outcolor}{rgb}{0.545, 0.0, 0.0}
+
+
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy 
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=urlcolor,
+      linkcolor=linkcolor,
+      citecolor=citecolor,
+      }
+    % Slightly bigger margins than the latex defaults
+    
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    
+    
+
+    \begin{document}
+    
+    
+    %\maketitle
+    \setcounter{section}{1}
+    
+
+    
+    \section{Feature selection}\label{feature-selection}
+
+    Pro 2 dimenze umíme chování funkce vizualizovat dobře, viz např. matice
+hexbinplotů v úvodu. Techniky \emph{výběru rysů} (angl. feature
+selection) nám umožní vybrat dvě dimenze, které jsou z nějakého pohledu
+ty "nejzajímavější". Narozdíl od obecnějších technik \emph{extrakce
+rysů} (angl. feature extraction), budou vybrané dimenze vždy již mezi
+těmi vstupními.
+
+Pojem "nejzajímavější dimenze" může znamenat ledacos, např.
+nejinformativnější vzhledem k vlivu na funkční hodnotu. Ale i
+nejinformativnější může znamenat ledacos. To uvidíme u jednotlivých
+technik. Obecný postup spočívá v natrénování nějakého statistkého
+regresoru a zvolení dvou dimenzí, kterým byla přiřazena největší váha.
+
+    \subsection{Příprava notebooku}\label{pux159uxedprava-notebooku}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}117}]:} \PY{o}{\PYZpc{}}\PY{k}{matplotlib} inline
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}118}]:} \PY{k+kn}{import} \PY{n+nn}{ipywidgets} \PY{k}{as} \PY{n+nn}{widgets}
+          \PY{k+kn}{import} \PY{n+nn}{matplotlib}\PY{n+nn}{.}\PY{n+nn}{pyplot} \PY{k}{as} \PY{n+nn}{plt}
+          \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k}{as} \PY{n+nn}{np}
+          \PY{k+kn}{import} \PY{n+nn}{pandas} \PY{k}{as} \PY{n+nn}{pd}
+          \PY{k+kn}{import} \PY{n+nn}{seaborn} \PY{k}{as} \PY{n+nn}{sns}
+          \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{feature\PYZus{}selection} \PY{k}{import} \PY{n}{SelectKBest}
+          \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{feature\PYZus{}selection} \PY{k}{import} \PY{n}{f\PYZus{}regression}\PY{p}{,} \PY{n}{mutual\PYZus{}info\PYZus{}regression}
+          \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{tree} \PY{k}{import} \PY{n}{DecisionTreeRegressor}
+          \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{ensemble} \PY{k}{import} \PY{n}{RandomForestRegressor}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}119}]:} \PY{n}{sns}\PY{o}{.}\PY{n}{set}\PY{p}{(}\PY{n}{style}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{white}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+    \subsection{Načtení dat}\label{naux10dtenuxed-dat}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}120}]:} \PY{n}{d1} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}csv}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{data/data1.csv}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{sep}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{;}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{header}\PY{o}{=}\PY{k+kc}{None}\PY{p}{)}
+          \PY{n}{n} \PY{o}{=} \PY{l+m+mi}{13}  \PY{c+c1}{\PYZsh{} number of inputs}
+          \PY{n}{input\PYZus{}indices} \PY{o}{=} \PY{n+nb}{list}\PY{p}{(}\PY{n+nb}{range}\PY{p}{(}\PY{n}{n}\PY{p}{)}\PY{p}{)}
+          \PY{n}{x} \PY{o}{=} \PY{n}{d1}\PY{p}{[}\PY{n}{input\PYZus{}indices}\PY{p}{]}
+          \PY{n}{y} \PY{o}{=} \PY{n}{d1}\PY{p}{[}\PY{n}{n}\PY{p}{]}
+\end{Verbatim}
+
+    \subsection{Korelace}\label{korelace}
+
+    Nejprve se podívme na to, jak moc korelují jednotlivé vstupní dimenze s
+výstupní hodnotou.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}121}]:} \PY{n}{d1}\PY{o}{.}\PY{n}{corr}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{abs}\PY{p}{(}\PY{p}{)}\PY{p}{[}\PY{l+m+mi}{13}\PY{p}{]}\PY{p}{[}\PY{n}{input\PYZus{}indices}\PY{p}{]}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{kind}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{bar}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+            \begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}121}]:} <matplotlib.axes.\_subplots.AxesSubplot at 0x7f12a774a978>
+\end{Verbatim}
+        
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{feature-selection_files/feature-selection_10_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    Vidíme, že s funkční hodnotou nejvíce korelují dimenze 1 a 10. Můžeme si
+teď vykreslit všechny body zprojektované do dimenzí 1 a 10. Každý bod
+obarvíme podle jeho funkční hodnoty.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}122}]:} \PY{n}{d1}\PY{o}{.}\PY{n}{plot}\PY{o}{.}\PY{n}{scatter}\PY{p}{(}\PY{n}{x}\PY{o}{=}\PY{l+m+mi}{10}\PY{p}{,} \PY{n}{y}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{,} \PY{n}{c}\PY{o}{=}\PY{n}{n}\PY{p}{,} \PY{n}{cmap}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{viridis}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+            \begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}122}]:} <matplotlib.axes.\_subplots.AxesSubplot at 0x7f12a7e89828>
+\end{Verbatim}
+        
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{feature-selection_files/feature-selection_12_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    Tím, že jsme velký počet dimenzí zredukovali na pouhé dvě, dostalo se
+spousta bodů přes sebe a tak v tomto grafu není nic moc vidět. Všechny
+vysoké hodnoty jsou zakryté hromadou těch nízkých. Řešením je
+hexbinplot, který pro každý úsek dvojdimenzionální plochy zobrazí
+maximální dosažené hodnoty (případně průměrnou hodnotu).
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}123}]:} \PY{k}{def} \PY{n+nf}{interactive\PYZus{}hexbin\PYZus{}plot}\PY{p}{(}\PY{n}{df}\PY{p}{,} \PY{n}{x}\PY{p}{,} \PY{n}{y}\PY{p}{,} \PY{n}{C}\PY{o}{=}\PY{n}{n}\PY{p}{)}\PY{p}{:}
+              \PY{k}{def} \PY{n+nf}{plot\PYZus{}hexbin}\PY{p}{(}\PY{n}{gridsize}\PY{p}{,} \PY{n}{logscale}\PY{p}{,} \PY{n}{maximum}\PY{p}{)}\PY{p}{:}
+                  \PY{n}{df}\PY{o}{.}\PY{n}{plot}\PY{o}{.}\PY{n}{hexbin}\PY{p}{(}\PY{n}{x}\PY{o}{=}\PY{n}{x}\PY{p}{,} \PY{n}{y}\PY{o}{=}\PY{n}{y}\PY{p}{,} \PY{n}{C}\PY{o}{=}\PY{n}{C}\PY{p}{,}
+                                \PY{n}{bins}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{log}\PY{l+s+s1}{\PYZsq{}} \PY{k}{if} \PY{n}{logscale} \PY{k}{else} \PY{k+kc}{None}\PY{p}{,}
+                                \PY{n}{gridsize}\PY{o}{=}\PY{n}{gridsize}\PY{p}{,}
+                                \PY{n}{reduce\PYZus{}C\PYZus{}function}\PY{o}{=}\PY{n}{np}\PY{o}{.}\PY{n}{max} \PY{k}{if} \PY{n}{maximum} \PY{k}{else} \PY{n}{np}\PY{o}{.}\PY{n}{mean}\PY{p}{,}
+                                \PY{n}{cmap}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{viridis}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+          
+              \PY{n}{gridsize} \PY{o}{=} \PY{n}{widgets}\PY{o}{.}\PY{n}{IntSlider}\PY{p}{(}\PY{n+nb}{min}\PY{o}{=}\PY{l+m+mi}{10}\PY{p}{,} \PY{n+nb}{max}\PY{o}{=}\PY{l+m+mi}{100}\PY{p}{,} \PY{n}{step}\PY{o}{=}\PY{l+m+mi}{5}\PY{p}{,} \PY{n}{value}\PY{o}{=}\PY{l+m+mi}{25}\PY{p}{,} \PY{n}{description}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{grid size}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+              \PY{n}{widgets}\PY{o}{.}\PY{n}{interact}\PY{p}{(}\PY{n}{plot\PYZus{}hexbin}\PY{p}{,} \PY{n}{gridsize}\PY{o}{=}\PY{n}{gridsize}\PY{p}{,} \PY{n}{logscale}\PY{o}{=}\PY{k+kc}{True}\PY{p}{,} \PY{n}{maximum}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}124}]:} \PY{n}{interactive\PYZus{}hexbin\PYZus{}plot}\PY{p}{(}\PY{n}{d1}\PY{p}{,} \PY{n}{x}\PY{o}{=}\PY{l+m+mi}{10}\PY{p}{,} \PY{n}{y}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{feature-selection_files/feature-selection_15_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    Korelace ale popisuje lineární závislost a závislost mezi vstupními
+dimenzemi a funkční hodnotou může být zcela nelineární. Což je i náš
+případ, na grafu korelací výše vidíme, že jednotlivé korelace jsou
+mizivé (\textless{} 0.01).
+
+V dalších částech prozkoumáme další míry "zajímavosti", které lze místo
+korelace použít: F-hodnotu, \emph{mutual-information} a
+\emph{Gini-index}.
+
+    \subsection{F-hodnota}\label{f-hodnota}
+
+    F-hodnota odpovídá váze natrénovaného lineárního regresoru a jde tak
+pouze o upravenou korelaci mezi každou vstupní dimenzí a funkční
+hodnotou. P-hodnota pak popisuje pravděpodobnost pozorované korelace,
+pokud by skutečná korelace byla nulová. Takže dimenze je pro lineární
+regresi tím důležitější, čím je F-hodnota větší a čím je p-hodnota
+menší. Podívejme se na graf F-hodnot a p-hodnot:
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}125}]:} \PY{n}{dimensions\PYZus{}selector} \PY{o}{=} \PY{n}{SelectKBest}\PY{p}{(}\PY{n}{f\PYZus{}regression}\PY{p}{,} \PY{n}{k}\PY{o}{=}\PY{l+m+mi}{2}\PY{p}{)}
+          \PY{n}{dimensions\PYZus{}selector}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{x}\PY{p}{,} \PY{n}{y}\PY{p}{)}
+          \PY{n}{pvalues} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{Series}\PY{p}{(}\PY{n}{dimensions\PYZus{}selector}\PY{o}{.}\PY{n}{pvalues\PYZus{}}\PY{p}{,} \PY{n}{name}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{p\PYZhy{}value}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+          \PY{n}{scores} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{Series}\PY{p}{(}\PY{n}{dimensions\PYZus{}selector}\PY{o}{.}\PY{n}{scores\PYZus{}}\PY{p}{,} \PY{n}{name}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{score}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+          \PY{n}{dim\PYZus{}info} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{concat}\PY{p}{(}\PY{p}{[}\PY{n}{pvalues}\PY{p}{,} \PY{n}{scores}\PY{p}{]}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}
+          \PY{n}{dim\PYZus{}info}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{kind}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{bar}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+            \begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}125}]:} <matplotlib.axes.\_subplots.AxesSubplot at 0x7f12aa3b52b0>
+\end{Verbatim}
+        
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{feature-selection_files/feature-selection_19_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    Největší skóre (a nejmenší p-hodnotu) mají dimenze 10 a 1. To je stejný
+výsledek jako u korelace, což není překvapivé, protože F-hodnota se
+počítá z korelace.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}126}]:} \PY{n}{interactive\PYZus{}hexbin\PYZus{}plot}\PY{p}{(}\PY{n}{d1}\PY{p}{,} \PY{n}{x}\PY{o}{=}\PY{l+m+mi}{10}\PY{p}{,} \PY{n}{y}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{feature-selection_files/feature-selection_21_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \subsection{Vzájemná informace}\label{vzuxe1jemnuxe1-informace}
+
+    Vzájemná informace (angl.
+\href{https://en.wikipedia.org/wiki/Mutual_information}{mutual-information})
+je metrika vyjadřující, jak znalost jedné proměnné snižuje nejistotu
+ohledně hodnoty druhé proměnné. Základní výhodou oproti korelaci a
+F-hodnotě je, že umí zachytit libovolnou závislost, nikoliv jen tu
+lineární. Nevýhodou je složitější, časově náročnější výpočet.
+
+Vypočtěme si tedy vzájemnou informaci mezi každou ze vstupních
+proměnných a funkční hodnotou:
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}127}]:} \PY{n}{dimensions\PYZus{}selector\PYZus{}mi} \PY{o}{=} \PY{n}{SelectKBest}\PY{p}{(}\PY{n}{mutual\PYZus{}info\PYZus{}regression}\PY{p}{,} \PY{n}{k}\PY{o}{=}\PY{l+m+mi}{2}\PY{p}{)}
+          \PY{n}{ds} \PY{o}{=} \PY{n}{d1}\PY{o}{.}\PY{n}{sample}\PY{p}{(}\PY{l+m+mi}{10000}\PY{p}{,} \PY{n}{random\PYZus{}state}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{)}
+          \PY{n}{xs} \PY{o}{=} \PY{n}{ds}\PY{p}{[}\PY{n}{input\PYZus{}indices}\PY{p}{]}
+          \PY{n}{ys} \PY{o}{=} \PY{n}{ds}\PY{p}{[}\PY{n}{n}\PY{p}{]}
+          \PY{n}{dimensions\PYZus{}selector\PYZus{}mi}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{xs}\PY{p}{,} \PY{n}{ys}\PY{p}{)}
+          \PY{n}{scores\PYZus{}mi} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{Series}\PY{p}{(}\PY{n}{dimensions\PYZus{}selector\PYZus{}mi}\PY{o}{.}\PY{n}{scores\PYZus{}}\PY{p}{,} \PY{n}{name}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{score}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+          \PY{n+nb}{print}\PY{p}{(}\PY{n}{scores\PYZus{}mi}\PY{o}{.}\PY{n}{sort\PYZus{}values}\PY{p}{(}\PY{n}{ascending}\PY{o}{=}\PY{k+kc}{False}\PY{p}{)}\PY{p}{)}
+          \PY{n}{scores\PYZus{}mi}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{kind}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{bar}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+0     3.404539
+10    2.964799
+5     2.928335
+9     2.902886
+1     2.896619
+6     2.872758
+3     2.858247
+8     2.820112
+11    2.803946
+12    2.779271
+4     2.773454
+7     2.752495
+2     2.737586
+Name: score, dtype: float64
+
+    \end{Verbatim}
+
+            \begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}127}]:} <matplotlib.axes.\_subplots.AxesSubplot at 0x7f12bb2846d8>
+\end{Verbatim}
+        
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{feature-selection_files/feature-selection_24_2.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    Největší skóre teď mají dimenze 0 a 10. Projekce funkce do prostoru
+daného těmito dvěma dimenzemi vypadá následovně:
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}128}]:} \PY{n}{interactive\PYZus{}hexbin\PYZus{}plot}\PY{p}{(}\PY{n}{d1}\PY{p}{,} \PY{n}{x}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{,} \PY{n}{y}\PY{o}{=}\PY{l+m+mi}{10}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{feature-selection_files/feature-selection_26_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \subsection{Rozhodovací stromy}\label{rozhodovacuxed-stromy}
+
+    Dalším modelem, který lze použít pro výběr rysů jsou regresní
+rozhodovací stromy (angl. decision trees). Naučený regresor opět
+poskytuje informaci o důležitosti rysů, podle toho, jak moc která
+vstupní dimenze přispívá k celkovému rozhodnutí o predikované hodnotě.
+Této metrice se říká \emph{Gini importance}.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}129}]:} \PY{n}{tree\PYZus{}model} \PY{o}{=} \PY{n}{DecisionTreeRegressor}\PY{p}{(}\PY{p}{)}
+          \PY{n}{tree\PYZus{}model} \PY{o}{=} \PY{n}{tree\PYZus{}model}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{x}\PY{p}{,} \PY{n}{y}\PY{p}{)}
+          \PY{n}{pd}\PY{o}{.}\PY{n}{Series}\PY{p}{(}\PY{n}{tree\PYZus{}model}\PY{o}{.}\PY{n}{feature\PYZus{}importances\PYZus{}}\PY{p}{)}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{kind}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{bar}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{logy}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}
+\end{Verbatim}
+
+            \begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}129}]:} <matplotlib.axes.\_subplots.AxesSubplot at 0x7f12b347cc18>
+\end{Verbatim}
+        
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{feature-selection_files/feature-selection_29_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    Problém rozhodovacího stromu je ten, že není stabilní, každý běh může
+skončit se značně jiným stromem a tedy značně jinými důležitostmi
+dimenzí. Řešením je les stromů!
+
+    \subsection{Náhodný les}\label{nuxe1hodnuxfd-les}
+
+    Náhodný les (angl. \emph{random forest}) je model, který průměruje
+hodnoty z mnoha rozhodovacích stromů, při jejichž učení bylo využito
+náhodnosti. Náhodný les je vhodnější pro výběr rysů než rozhdovací
+strom, protože díky průměrování velkého množství stromů je vypočtená
+důležitost jednotlivých rysů robustnější (má menší rozptyl).
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}130}]:} \PY{n}{forest\PYZus{}model} \PY{o}{=} \PY{n}{RandomForestRegressor}\PY{p}{(}\PY{n}{random\PYZus{}state}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{)}
+          \PY{n}{forest\PYZus{}model} \PY{o}{=} \PY{n}{forest\PYZus{}model}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{x}\PY{p}{,} \PY{n}{y}\PY{p}{)}
+          \PY{n}{pd}\PY{o}{.}\PY{n}{Series}\PY{p}{(}\PY{n}{forest\PYZus{}model}\PY{o}{.}\PY{n}{feature\PYZus{}importances\PYZus{}}\PY{p}{)}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{kind}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{bar}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{logy}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}
+\end{Verbatim}
+
+            \begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}130}]:} <matplotlib.axes.\_subplots.AxesSubplot at 0x7f12a8f44470>
+\end{Verbatim}
+        
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{feature-selection_files/feature-selection_33_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    Nejvýznamnější dimenze: 11 a 2
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}131}]:} \PY{n}{interactive\PYZus{}hexbin\PYZus{}plot}\PY{p}{(}\PY{n}{d1}\PY{p}{,} \PY{n}{x}\PY{o}{=}\PY{l+m+mi}{11}\PY{p}{,} \PY{n}{y}\PY{o}{=}\PY{l+m+mi}{2}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{feature-selection_files/feature-selection_35_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \subsection{Výsledky}\label{vuxfdsledky}
+
+    Přehled nejvýznamnějších dimenzí podle různých metrik:
+
+\begin{longtable}[]{@{}lll@{}}
+\toprule
+Metrika (model) & d1 & d2\tabularnewline
+\midrule
+\endhead
+Korelace / F-hodnota (lineární regrese) & 10 & 1\tabularnewline
+Vzájemná informace & 0 & 10\tabularnewline
+Gini importance (Náhodný les) & 11 & 2\tabularnewline
+\bottomrule
+\end{longtable}
+
+    Provedené analýzy můžeme také využít tak, že zjednodušíme graf z úvodu,
+který zobrazoval projekci na všechny dvojice vstupních hodnot. Omezíme
+se jen na několik dimenzí, které se podle analýz zdají být
+nejzajímavější. Navíc budeme zobrazovat zlogaritmované funkční hodnoty.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}132}]:} \PY{n}{ds} \PY{o}{=} \PY{n}{d1}\PY{o}{.}\PY{n}{sample}\PY{p}{(}\PY{l+m+mi}{10000}\PY{p}{,} \PY{n}{random\PYZus{}state}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{)}
+          \PY{n}{y\PYZus{}log} \PY{o}{=} \PY{n}{ds}\PY{p}{[}\PY{n}{n}\PY{p}{]}\PY{o}{.}\PY{n}{apply}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{log}\PY{p}{)}
+          \PY{n}{g} \PY{o}{=} \PY{n}{sns}\PY{o}{.}\PY{n}{PairGrid}\PY{p}{(}\PY{n}{ds}\PY{p}{,} \PY{n+nb}{vars}\PY{o}{=}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{2}\PY{p}{,} \PY{l+m+mi}{10}\PY{p}{,} \PY{l+m+mi}{11}\PY{p}{]}\PY{p}{)}
+          \PY{n}{g} \PY{o}{=} \PY{n}{g}\PY{o}{.}\PY{n}{map\PYZus{}diag}\PY{p}{(}\PY{n}{plt}\PY{o}{.}\PY{n}{scatter}\PY{p}{,} \PY{n}{y}\PY{o}{=}\PY{n}{y\PYZus{}log}\PY{p}{)}
+          \PY{n}{g} \PY{o}{=} \PY{n}{g}\PY{o}{.}\PY{n}{map\PYZus{}offdiag}\PY{p}{(}\PY{n}{plt}\PY{o}{.}\PY{n}{hexbin}\PY{p}{,} \PY{n}{C}\PY{o}{=}\PY{n}{y\PYZus{}log}\PY{p}{,} \PY{n}{reduce\PYZus{}C\PYZus{}function}\PY{o}{=}\PY{n}{np}\PY{o}{.}\PY{n}{max}\PY{p}{,} \PY{n}{gridsize}\PY{o}{=}\PY{l+m+mi}{15}\PY{p}{,} \PY{n}{cmap}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{viridis}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{feature-selection_files/feature-selection_39_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \subsection{Větší dataset}\label{vux11btux161uxed-dataset}
+
+    Zkusme pomocí uvedených technik výběru rysů prozkoumat ještě druhý
+dataset. Protože je mnohonásobně větší, některé výpočty by trvaly
+dlouho. To lze vyřešit náhodným nasemplováním části bodů.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}133}]:} \PY{n}{d2} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}csv}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{data/data2.csv}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{sep}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{;}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{header}\PY{o}{=}\PY{k+kc}{None}\PY{p}{)}
+          \PY{n}{x2}\PY{p}{,} \PY{n}{y2} \PY{o}{=} \PY{n}{d2}\PY{p}{[}\PY{n}{input\PYZus{}indices}\PY{p}{]}\PY{p}{,} \PY{n}{d2}\PY{p}{[}\PY{n}{n}\PY{p}{]}
+          \PY{n}{ds2} \PY{o}{=} \PY{n}{d2}\PY{o}{.}\PY{n}{sample}\PY{p}{(}\PY{l+m+mi}{10000}\PY{p}{,} \PY{n}{random\PYZus{}state}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{)}
+          \PY{n}{xs2}\PY{p}{,} \PY{n}{ys2} \PY{o}{=} \PY{n}{ds2}\PY{p}{[}\PY{n}{input\PYZus{}indices}\PY{p}{]}\PY{p}{,} \PY{n}{ds2}\PY{p}{[}\PY{n}{n}\PY{p}{]}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}134}]:} \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{F\PYZhy{}skóre vstupních dimenzí}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+          \PY{n}{dimensions\PYZus{}selector}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{x2}\PY{p}{,} \PY{n}{y2}\PY{p}{)}
+          \PY{n}{pd}\PY{o}{.}\PY{n}{Series}\PY{p}{(}\PY{n}{dimensions\PYZus{}selector}\PY{o}{.}\PY{n}{scores\PYZus{}}\PY{p}{,} \PY{n}{name}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{score}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{kind}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{bar}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+            \begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}134}]:} <matplotlib.axes.\_subplots.AxesSubplot at 0x7f12adc0ddd8>
+\end{Verbatim}
+        
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{feature-selection_files/feature-selection_43_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}135}]:} \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Vzájemná informace}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+          \PY{n}{dimensions\PYZus{}selector\PYZus{}mi}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{xs2}\PY{p}{,} \PY{n}{ys2}\PY{p}{)}
+          \PY{n}{scores\PYZus{}mi} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{Series}\PY{p}{(}\PY{n}{dimensions\PYZus{}selector\PYZus{}mi}\PY{o}{.}\PY{n}{scores\PYZus{}}\PY{p}{,} \PY{n}{name}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{score}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+          \PY{n}{scores\PYZus{}mi}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{kind}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{bar}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+            \begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}135}]:} <matplotlib.axes.\_subplots.AxesSubplot at 0x7f12a759bd30>
+\end{Verbatim}
+        
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{feature-selection_files/feature-selection_44_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}136}]:} \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Gini importance (náhodný les)}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+          \PY{n}{forest\PYZus{}model} \PY{o}{=} \PY{n}{forest\PYZus{}model}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{xs2}\PY{p}{,} \PY{n}{ys2}\PY{p}{)}
+          \PY{n}{pd}\PY{o}{.}\PY{n}{Series}\PY{p}{(}\PY{n}{forest\PYZus{}model}\PY{o}{.}\PY{n}{feature\PYZus{}importances\PYZus{}}\PY{p}{)}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{kind}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{bar}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{logy}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}
+\end{Verbatim}
+
+            \begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}136}]:} <matplotlib.axes.\_subplots.AxesSubplot at 0x7f12aa485198>
+\end{Verbatim}
+        
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{feature-selection_files/feature-selection_45_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    Přehled nejvýznamnějších dimenzí podle různých metrik:
+
+\begin{longtable}[]{@{}lll@{}}
+\toprule
+Metrika (model) & d1 & d2\tabularnewline
+\midrule
+\endhead
+Korelace / F-hodnota (lineární regrese) & 12 & 10\tabularnewline
+Vzájemná informace & 0 & 5\tabularnewline
+Gini importance (Náhodný les) & 12 & 0\tabularnewline
+\bottomrule
+\end{longtable}
+
+    Jako dvě nejzajímější dimenze se zdají 0 a 5, vykresleme si tedy nejprve
+graf zprojektovaný do těchto dvou dimenzí:
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}137}]:} \PY{n}{interactive\PYZus{}hexbin\PYZus{}plot}\PY{p}{(}\PY{n}{ds2}\PY{p}{,} \PY{n}{x}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{,} \PY{n}{y}\PY{o}{=}\PY{l+m+mi}{5}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{feature-selection_files/feature-selection_48_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    Nebo můžeme vykreslit projekce pro všechny dvojice z těch
+nejzajímavějších dimenzí:
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}138}]:} \PY{n}{y2\PYZus{}log} \PY{o}{=} \PY{n}{ds2}\PY{p}{[}\PY{n}{n}\PY{p}{]}\PY{o}{.}\PY{n}{apply}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{log}\PY{p}{)}
+          \PY{n}{g} \PY{o}{=} \PY{n}{sns}\PY{o}{.}\PY{n}{PairGrid}\PY{p}{(}\PY{n}{ds2}\PY{p}{,} \PY{n+nb}{vars}\PY{o}{=}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{5}\PY{p}{,} \PY{l+m+mi}{10}\PY{p}{,} \PY{l+m+mi}{12}\PY{p}{]}\PY{p}{)}
+          \PY{n}{g} \PY{o}{=} \PY{n}{g}\PY{o}{.}\PY{n}{map\PYZus{}diag}\PY{p}{(}\PY{n}{plt}\PY{o}{.}\PY{n}{scatter}\PY{p}{,} \PY{n}{y}\PY{o}{=}\PY{n}{y2\PYZus{}log}\PY{p}{)}
+          \PY{n}{g} \PY{o}{=} \PY{n}{g}\PY{o}{.}\PY{n}{map\PYZus{}offdiag}\PY{p}{(}\PY{n}{plt}\PY{o}{.}\PY{n}{hexbin}\PY{p}{,} \PY{n}{C}\PY{o}{=}\PY{n}{y2\PYZus{}log}\PY{p}{,} \PY{n}{reduce\PYZus{}C\PYZus{}function}\PY{o}{=}\PY{n}{np}\PY{o}{.}\PY{n}{max}\PY{p}{,} \PY{n}{gridsize}\PY{o}{=}\PY{l+m+mi}{15}\PY{p}{,} \PY{n}{cmap}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{viridis}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{feature-selection_files/feature-selection_50_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+
+    % Add a bibliography block to the postdoc
+    
+    
+    
+    \end{document}
